@@ -67,7 +67,7 @@ scatterMaken90Y <- function(df,percX,percY){
 }
 
 scatterMakenDark <- function(df,percX,percY){
-  ggplot(df,aes(x=X,y=Y))+geom_point(colour='#026937') +
+  ggplot(df,aes(x=X,y=Y))+geom_point(colour='red') +
     geom_label_repel(data=df%>% filter(X > quantile(X, percX/100)|
                                          Y > quantile(Y, percY/100)),aes(label = Player))+
     labs(x=df$xAxis,
@@ -81,7 +81,7 @@ scatterMakenDark <- function(df,percX,percY){
 
 
 scatterMaken90XDark <- function(df,percX,percY){
-  ggplot(df,aes(x=X/`90s`,y=Y))+geom_point(colour='#026937') +
+  ggplot(df,aes(x=X/`90s`,y=Y))+geom_point(colour='red') +
     geom_label_repel(data=df%>% filter(X/`90s` > quantile(X/`90s`, percX/100)|
                                          Y > quantile(Y, percY/100)),aes(label = Player))+
     labs(x=glue::glue("{df$xAxis} P90"),
@@ -96,7 +96,7 @@ scatterMaken90XDark <- function(df,percX,percY){
 
 
 scatterMaken90Dark <- function(df,percX,percY){
-  ggplot(df,aes(x=X/`90s`,y=Y/`90s`))+geom_point(colour='#026937') +
+  ggplot(df,aes(x=X/`90s`,y=Y/`90s`))+geom_point(colour='red') +
     geom_label_repel(data=df%>% filter(X > quantile(X/`90s`, percX/100)|
                                          Y > quantile(Y/`90s`, percY/100)),aes(label = Player))+
     labs(x=glue::glue("{df$xAxis} P90"),
@@ -109,7 +109,7 @@ scatterMaken90Dark <- function(df,percX,percY){
 }
 
 scatterMaken90YDark <- function(df,percX,percY){
-  ggplot(df,aes(x=X,y=Y/`90s`))+geom_point(colour='#026937') +
+  ggplot(df,aes(x=X,y=Y/`90s`))+geom_point(colour='red') +
     geom_label_repel(data=df%>% filter(X > quantile(X, percX/100)|
                                          (Y/`90s`) > quantile(Y/`90s`, percY/100)),aes(label = Player))+
     labs(x=df$xAxis,
