@@ -97,8 +97,8 @@ scatterMaken90XDark <- function(df,percX,percY){
 
 scatterMaken90Dark <- function(df,percX,percY){
   ggplot(df,aes(x=X/`90s`,y=Y/`90s`))+geom_point(colour='red', alpha=0.5) +
-    geom_label_repel(data=df%>% filter(X > quantile(X/`90s`, percX/100)|
-                                         Y > quantile(Y/`90s`, percY/100)),aes(label = Player))+
+    geom_label_repel(data=df%>% filter(X/`90s` > quantile(X/`90s`, percX/100)|
+                                         Y/`90s` > quantile(Y/`90s`, percY/100)),aes(label = Player))+
     labs(x=glue::glue("{df$xAxis} P90"),
          y=glue::glue("{df$yAxis} P90"),
          title = paste0(df$xAxis," and " ,df$yAxis, " UCL 19/20"),
