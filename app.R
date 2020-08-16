@@ -49,8 +49,8 @@ ui <- fluidPage(
      
             
 
-            sliderInput("minNinety", "Number of 90s:",
-                        min = 0, max = 5, value = 3
+            sliderInput("minNinety", "Minimum number of 90s:",
+                        min = 1, max = 5, value = 3
             ),
             numericInput("percX", "See label above certain percentile X:", 99, min = 50, max = 100),
             numericInput("percY", "See label above certain percentile Y:", 99, min = 50, max = 100)
