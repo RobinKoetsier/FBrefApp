@@ -35,15 +35,16 @@ ui <- fluidPage(
    
                 
                 selectInput('x', 'x', 
+                          
                             selected = "Progressive Passes",
-                            choices = ChoicesList),
+                            choices = ChoicesList, multiple=FALSE, selectize=TRUE),
             
           
                 selectInput('y', 'y', 
                             selected = "Assists",
-                            choices = ChoicesList),
+                            choices = ChoicesList, multiple=FALSE, selectize=TRUE),
             
-            
+           
          
      
             
