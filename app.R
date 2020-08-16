@@ -12,7 +12,7 @@ ga_set_approval(consent = TRUE)
 dfAll2 <- readRDS("fbrefdata.rds")
 
 
-ChoicesList <- colnames(dfAll2)[c(3:47)]
+ChoicesList <- colnames(dfAll2)[c(3:55)]
 ChoicesList <- sort(ChoicesList)
 ui <- fluidPage(
     
