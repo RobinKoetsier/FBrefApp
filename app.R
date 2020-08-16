@@ -1,5 +1,6 @@
 library(shiny)
-library(tidyverse)
+library(dplyr)
+library(ggplot2)
 library(ggdark)
 library(reactable)
 library(GAlogger)
