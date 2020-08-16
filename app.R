@@ -8,7 +8,7 @@ library(glue)
 source("HelpersFBREF.R")
 ga_set_tracking_id("UA-170459986-1")
 ga_set_approval(consent = TRUE)
-
+dfAll2 <- readRDS("fbrefdata.rds")
 
 
 ChoicesList <- colnames(dfAll2)[c(3:47)]
