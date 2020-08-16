@@ -5,11 +5,12 @@ library(reactable)
 library(GAlogger)
 library(ggrepel)
 library(glue)
+source("HelpersFBREF.R")
 ga_set_tracking_id("UA-170459986-1")
 ga_set_approval(consent = TRUE)
-colnames(df)
-#dfALL <- df1
-is.numeric(dfAll$`Percentage on Target`)
+
+
+
 ChoicesList <- colnames(dfAll2)[c(3:47)]
 ChoicesList <- sort(ChoicesList)
 ui <- fluidPage(
