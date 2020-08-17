@@ -7,12 +7,12 @@ library(GAlogger)
 library(ggrepel)
 library(glue)
 source("HelpersFBREF.R")
-ga_set_tracking_id("UA-170459986-1")
+ga_set_tracking_id("UA-175572271-1")
 ga_set_approval(consent = TRUE)
-dfAll2 <- readRDS("fbrefdata.rds")
+ELCL <- readRDS("fbrefdata.rds")
 
 
-ChoicesList <- colnames(dfAll2)[c(3:55)]
+ChoicesList <- colnames(ELCL)[c(3:55)]
 ChoicesList <- sort(ChoicesList)
 ui <- fluidPage(
     
@@ -22,6 +22,11 @@ ui <- fluidPage(
     # Sidebar with a slider input for number of bins 
     sidebarLayout(
         sidebarPanel(
+          checkboxGroupInput(inputId = "Competition",
+                             label = "Select Competition(s):",
+                             choices = c("Champions League" = "Champions League",
+                                         "Europa League" = "Europa League"),
+                             selected = "Champions League"),
             radioButtons("typeX", "x axis:",
                          c("Normal" = "normX",
                            "per 90" = "p90X")),
@@ -81,10 +86,11 @@ server <- function(input, output) {
     
     myData <- reactive({
          
-        filterData(df = dfAll2,
+        filterData(df = ELCL,
                    Xx = input$x,
                    Yy=input$y,
-                   minNinety <- input$minNinety)
+                   minNinety = input$minNinety,
+                   comp = input$Competition)
         
     })
     output$codes <- renderReactable({
