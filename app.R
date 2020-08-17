@@ -7,12 +7,12 @@ library(GAlogger)
 library(ggrepel)
 library(glue)
 source("HelpersFBREF.R")
-ga_set_tracking_id("UA-175572271-1")
+ga_set_tracking_id("UA-170459986-1")
 ga_set_approval(consent = TRUE)
-ELCL <- readRDS("fbrefdata.rds")
+dfAll2 <- readRDS("fbrefdata.rds")
 
 
-ChoicesList <- colnames(ELCL)[c(3:55)]
+ChoicesList <- colnames(dfAll2)[c(3:55)]
 ChoicesList <- sort(ChoicesList)
 ui <- fluidPage(
     
@@ -22,30 +22,25 @@ ui <- fluidPage(
     # Sidebar with a slider input for number of bins 
     sidebarLayout(
         sidebarPanel(
-          checkboxGroupInput(inputId = "Competition",
-                             label = "Select Competition(s):",
-                             choices = c("Champions League" = "Champions League",
-                                         "Europa League" = "Europa League"),
-                             selected = "Champions League"),
-            radioButtons("typeX", "X Axis:",
-                         c("Sum" = "normX",
+            radioButtons("typeX", "x axis:",
+                         c("Normal" = "normX",
                            "per 90" = "p90X")),
             
-            radioButtons("typeY", "Y Axis:",
-                         c("Sum" = "normY",
+            radioButtons("typeY", "y axis:",
+                         c("Normal" = "normY",
                            "per 90" = "p90Y")),
             
            
           
    
                 
-                selectInput('x', 'X', 
+                selectInput('x', 'x', 
                           
                             selected = "Progressive Passes",
                             choices = ChoicesList, multiple=FALSE, selectize=TRUE),
             
           
-                selectInput('y', 'Y', 
+                selectInput('y', 'y', 
                             selected = "Assists",
                             choices = ChoicesList, multiple=FALSE, selectize=TRUE),
             
@@ -86,11 +81,10 @@ server <- function(input, output) {
     
     myData <- reactive({
          
-        filterData(df = ELCL,
+        filterData(df = dfAll2,
                    Xx = input$x,
                    Yy=input$y,
-                   minNinety = input$minNinety,
-                   comp = input$Competition)
+                   minNinety <- input$minNinety)
         
     })
     output$codes <- renderReactable({

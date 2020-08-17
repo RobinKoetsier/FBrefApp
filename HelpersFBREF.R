@@ -1,5 +1,5 @@
-filterData <- function(df,Xx,Yy,minNinety,compi){
-  df <- df %>% filter(`90s` >= minNinety) %>% filter(comp %in% compi)
+filterData <- function(df,Xx,Yy,minNinety){
+  df <- df %>% filter(`90s` >= minNinety)
   df <- df %>% select(Player,`90s`,Xx,Yy)
  # idvec <- grep(Xx, colnames(df), value = TRUE)
 #  df<-df[c("Player",idvec, Yy,"90s")]
