@@ -27,25 +27,25 @@ ui <- fluidPage(
                              choices = c("Champions League" = "Champions League",
                                          "Europa League" = "Europa League"),
                              selected = "Champions League"),
-            radioButtons("typeX", "x axis:",
-                         c("Normal" = "normX",
+            radioButtons("typeX", "X Axis:",
+                         c("Sum" = "normX",
                            "per 90" = "p90X")),
             
-            radioButtons("typeY", "y axis:",
-                         c("Normal" = "normY",
+            radioButtons("typeY", "Y Axis:",
+                         c("Sum" = "normY",
                            "per 90" = "p90Y")),
             
            
           
    
                 
-                selectInput('x', 'x', 
+                selectInput('x', 'X', 
                           
                             selected = "Progressive Passes",
                             choices = ChoicesList, multiple=FALSE, selectize=TRUE),
             
           
-                selectInput('y', 'y', 
+                selectInput('y', 'Y', 
                             selected = "Assists",
                             choices = ChoicesList, multiple=FALSE, selectize=TRUE),
             
