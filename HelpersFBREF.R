@@ -17,7 +17,7 @@ scatterMaken <- function(df,percX,percY){
                                          Y > quantile(Y, percY/100)),aes(label = Player),fill="white",color="black")+
     labs(x=df$xAxis,
          y=df$yAxis,
-         title = paste0(df$xAxis," and " ,df$yAxis, " UCL 19/20"),
+         title = paste0(df$xAxis," and " ,df$yAxis, " Europe 19/20"),
          caption = "Data from FBref.com\n@RobinWilhelmus") +
     theme_bw()+
     theme(plot.title = element_text(hjust=0.5, size = 15))
@@ -32,7 +32,7 @@ scatterMaken90X <- function(df,percX,percY){
     labs(x=glue::glue("{df$xAxis} P90"),
          y=df$yAxis,
          
-         title = paste0(df$xAxis," and " ,df$yAxis, " UCL 19/20"),
+         title = paste0(df$xAxis," and " ,df$yAxis, " Europe 19/20"),
          caption = "Data from FBref.com\n@RobinWilhelmus") +
     theme_bw()+
     theme(plot.title = element_text(hjust=0.5, size = 15))
@@ -46,7 +46,7 @@ scatterMaken90 <- function(df,percX,percY){
                                          Y/`90s` > quantile(Y/`90s`, percY/100)),aes(label = Player),fill="white",color="black")+
     labs(x=glue::glue("{df$xAxis} P90"),
          y=glue::glue("{df$yAxis} P90"),
-         title = paste0(df$xAxis," and " ,df$yAxis, " UCL 19/20"),
+         title = paste0(df$xAxis," and " ,df$yAxis, " Europe 19/20"),
          caption = "Data from FBref.com\n@RobinWilhelmus") +
     theme_bw()+
     theme(plot.title = element_text(hjust=0.5, size = 15))
@@ -59,7 +59,7 @@ scatterMaken90Y <- function(df,percX,percY){
                                          Y/`90s` > quantile(Y/`90s`, percY/100)),aes(label = Player),fill="white",color="black")+
     labs(x=df$xAxis,
          y=glue::glue("{df$yAxis} P90"),
-         title = paste0(df$xAxis," and " ,df$yAxis, " UCL 19/20"),
+         title = paste0(df$xAxis," and " ,df$yAxis, " Europe 19/20"),
          caption = "Data from FBref.com\n@RobinWilhelmus")+
     theme_bw() +
     theme(plot.title = element_text(hjust=0.5, size = 15))
@@ -72,7 +72,7 @@ scatterMakenDark <- function(df,percX,percY){
                                          Y > quantile(Y, percY/100)),aes(label = Player))+
     labs(x=df$xAxis,
          y=df$yAxis,
-         title = paste0(df$xAxis," and " ,df$yAxis, " UCL 19/20"),
+         title = paste0(df$xAxis," and " ,df$yAxis, " Europe 19/20"),
          caption = "Data from FBref.com\n@RobinWilhelmus") +
     dark_theme_gray()+
     theme(plot.title = element_text(hjust=0.5, size = 15))
@@ -87,7 +87,7 @@ scatterMaken90XDark <- function(df,percX,percY){
     labs(x=glue::glue("{df$xAxis} P90"),
          y=df$yAxis,
          
-         title = paste0(df$xAxis," and " ,df$yAxis, " UCL 19/20"),
+         title = paste0(df$xAxis," and " ,df$yAxis, " Europe 19/20"),
          caption = "Data from FBref.com\n@RobinWilhelmus") +
     dark_theme_gray()+
     theme(plot.title = element_text(hjust=0.5, size = 15))
@@ -101,7 +101,7 @@ scatterMaken90Dark <- function(df,percX,percY){
                                          Y/`90s` > quantile(Y/`90s`, percY/100)),aes(label = Player))+
     labs(x=glue::glue("{df$xAxis} P90"),
          y=glue::glue("{df$yAxis} P90"),
-         title = paste0(df$xAxis," and " ,df$yAxis, " UCL 19/20"),
+         title = paste0(df$xAxis," and " ,df$yAxis, " Europe 19/20"),
          caption = "Data from FBref.com\n@RobinWilhelmus") +
     dark_theme_gray()+
     theme(plot.title = element_text(hjust=0.5, size = 15))
@@ -114,7 +114,7 @@ scatterMaken90YDark <- function(df,percX,percY){
                                          (Y/`90s`) > quantile(Y/`90s`, percY/100)),aes(label = Player))+
     labs(x=df$xAxis,
          y=glue::glue("{df$yAxis} P90"),
-         title = paste0(df$xAxis," and " ,df$yAxis, " UCL 19/20"),
+         title = paste0(df$xAxis," and " ,df$yAxis, " Europe 19/20"),
          caption = "Data from FBref.com\n@RobinWilhelmus")+
     dark_theme_gray() +
     theme(plot.title = element_text(hjust=0.5, size = 15))
