@@ -9,14 +9,30 @@ library(glue)
 source("HelpersFBREF.R")
 ga_set_tracking_id("UA-175572271-1")
 ga_set_approval(consent = TRUE)
-ga_set_tracking_id("UA-170459986-1")
-ga_set_approval(consent = TRUE)
+
 ELCL <- readRDS("fbrefdata.rds")
 
 
 ChoicesList <- colnames(ELCL)[c(3:55)]
 ChoicesList <- sort(ChoicesList)
-ui <- fluidPage(
+ui <- fluidPage(tags$head(HTML(
+  "<script>
+      (function(i,s,o,g,r,a,m){
+        i['GoogleAnalyticsObject']=r;i[r]=i[r]||
+        function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();
+          a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+          a.async=1;
+          a.src=g;m.parentNode.insertBefore(a,m)
+        })
+      (window, document, 'script',
+        '//www.google-analytics.com/analytics.js','ga');
+      
+        ga('create', 'UA-175572271-1', 'auto');
+        ga('send', 'pageview');
+      
+      </script>"
+)),
     
     # Application title
     titlePanel("Create your own FBref scatter plot - A Shiny app by @RobinWilhelmus"),
@@ -56,7 +72,7 @@ ui <- fluidPage(
           sliderInput("age", "Age range:",
                       min = min(ELCL$Age), max(ELCL$Age), value = c(min(ELCL$Age),max(ELCL$Age))
           ),
-            
+          
 
             sliderInput("minNinety", "Minimum number of 90s:",
                         min = 1, max = 5, value = 3
@@ -78,6 +94,7 @@ ui <- fluidPage(
                                  
                                  plotOutput("plot3")),
                         tabPanel("Table", 
+                               
                                  reactableOutput("codes", width = "auto", height = "auto",
                                                  inline = FALSE))
             )
@@ -87,7 +104,7 @@ ui <- fluidPage(
 
 
 server <- function(input, output) {
-    
+ 
     myData <- reactive({
       req(input$x) 
       req(input$y)
