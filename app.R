@@ -125,6 +125,7 @@ server <- function(input, output) {
   observeEvent(input$Competition, {
     print(input$Competition)
     sub<-input$Competition
+    print(sub)
   })
     myData <- reactive({
       req(input$x) 
@@ -134,6 +135,7 @@ server <- function(input, output) {
       req(input$age[1])
       req(input$age[2])
       req(sub)
+      
       if(input$sum == "yes"){
       
       filter(ELCL,`90s` >= input$minNinety) %>% filter(comp %in% input$Competition) %>%
@@ -152,7 +154,7 @@ server <- function(input, output) {
         filter(ELCL,`90s` >= input$minNinety) %>% filter(comp %in% input$Competition) %>%
           filter(Squad %in% input$teams) %>%
           filter(Age>input$age[1] & Age < input$age[2])%>%
-          select(Player,`90s`,input$x,input$y) %>%
+          select(Player,`90s`,input$x,input$y,comp) %>%
           # mutate(subtitle = sub) %>%
           
           mutate(xAxis = input$x) %>%
@@ -183,49 +185,106 @@ server <- function(input, output) {
     output$myTable <- renderTable(myData())
     output$plot2<-renderPlot({
         if(input$typeX == "p90X" & input$typeY != "p90Y"){
-            scatterMaken90X(df = myData(),
-                         percX=input$percX,
-                         percY=input$percY)
+          ggplot(myData(),aes(x=as.integer(X)/`90s`,y=as.integer(Y)))+geom_point(colour='#026937') +
+            geom_label_repel(data=myData()%>% filter(X/`90s` > quantile(X/`90s`, input$percX/100)|
+                                                       Y > quantile(Y, input$percY/100)),aes(label = Player),fill="white",color="black")+
+            labs(x=glue::glue("{myData()$xAxis} P90"),
+                 y=glue::glue("{myData()$yAxis}"),
+                 title = paste0(myData()$xAxis," and " ,myData()$yAxis, " 19/20"),
+                 subtitle= paste(unique(myData()$comp),collapse=" - "),
+                 caption = "Data from FBref.com\n@RobinWilhelmus") +
+            theme_bw()+
+            theme(plot.title = element_text(hjust=0.5, size = 15),
+                  plot.subtitle = element_text(hjust=0.5))
         }else  if(input$typeX == "p90X" & input$typeY == "p90Y") {
-        scatterMaken90(df = myData(),
-                     percX=input$percX,
-                     percY=input$percY)
+          ggplot(myData(),aes(x=as.integer(X)/`90s`,y=as.integer(Y)/`90s`))+geom_point(colour='#026937') +
+            geom_label_repel(data=myData()%>% filter(X/`90s` > quantile(X/`90s`, input$percX/100)|
+                                                       Y/`90s` > quantile(Y/`90s`, input$percY/100)),aes(label = Player),fill="white",color="black")+
+            labs(x=glue::glue("{myData()$xAxis} P90"),
+                 y=glue::glue("{myData()$yAxis} P90"),
+                 title = paste0(myData()$xAxis," and " ,myData()$yAxis, " 19/20"),
+                 subtitle= paste(unique(myData()$comp),collapse=" - "),
+                 caption = "Data from FBref.com\n@RobinWilhelmus") +
+            theme_bw()+
+            theme(plot.title = element_text(hjust=0.5, size = 15),
+                  plot.subtitle = element_text(hjust=0.5))
         }else  if(input$typeX != "p90X" & input$typeY == "p90Y") {
-            scatterMaken90Y(df = myData(),
-                           percX=input$percX,
-                           percY=input$percY)
+          ggplot(myData(),aes(x=as.integer(X),y=as.integer(Y)/`90s`))+geom_point(colour='#026937') +
+            geom_label_repel(data=myData()%>% filter(X > quantile(X, input$percX/100)|
+                                                       Y/`90s` > quantile(Y/`90s`, input$percY/100)),aes(label = Player),fill="white",color="black")+
+            labs(x=glue::glue("{myData()$xAxis} P90"),
+                 y=myData()$yAxis,
+                 title = paste0(myData()$xAxis," and " ,myData()$yAxis, " 19/20"),
+                 subtitle= paste(unique(myData()$comp),collapse=" - "),
+                 caption = "Data from FBref.com\n@RobinWilhelmus") +
+            theme_bw()+
+            theme(plot.title = element_text(hjust=0.5, size = 15),
+                  plot.subtitle = element_text(hjust=0.5))
         }else{
-          uniek<-input$Competition
+          
           ggplot(myData(),aes(x=as.integer(X),y=as.integer(Y)))+geom_point(colour='#026937') +
             geom_label_repel(data=myData()%>% filter(X > quantile(X, input$percX/100)|
                                                  Y > quantile(Y, input$percY/100)),aes(label = Player),fill="white",color="black")+
             labs(x=myData()$xAxis,
                  y=myData()$yAxis,
                  title = paste0(myData()$xAxis," and " ,myData()$yAxis, " 19/20"),
-                # subtitle= substitute(uniek),
+                subtitle= paste(unique(myData()$comp),collapse=" - "),
                  caption = "Data from FBref.com\n@RobinWilhelmus") +
             theme_bw()+
-            theme(plot.title = element_text(hjust=0.5, size = 15))
+            theme(plot.title = element_text(hjust=0.5, size = 15),
+                  plot.subtitle = element_text(hjust=0.5))
         }
         }
         , height = 500, width = 750)
     output$plot3<-renderPlot({
         if(input$typeX == "p90X" & input$typeY != "p90Y"){
-            scatterMaken90XDark(df = myData(),
-                            percX=input$percX,
-                            percY=input$percY)
+          ggplot(myData(),aes(x=as.integer(X)/`90s`,y=as.integer(Y)))+geom_point(colour='#026937') +
+            geom_label_repel(data=myData()%>% filter(X/`90s` > quantile(X/`90s`, input$percX/100)|
+                                                       Y > quantile(Y, input$percY/100)),aes(label = Player),fill="black",color="white")+
+            labs(x=glue::glue("{myData()$xAxis} P90"),
+                 y=glue::glue("{myData()$yAxis}"),
+                 title = paste0(myData()$xAxis," and " ,myData()$yAxis, " 19/20"),
+                 subtitle= paste(unique(myData()$comp),collapse=" - "),
+                 caption = "Data from FBref.com\n@RobinWilhelmus") +
+            dark_theme_gray()+
+            theme(plot.title = element_text(hjust=0.5, size = 15),
+                  plot.subtitle = element_text(hjust=0.5))
         }else  if(input$typeX == "p90X" & input$typeY == "p90Y") {
-            scatterMaken90Dark(df = myData(),
-                           percX=input$percX,
-                           percY=input$percY)
+          ggplot(myData(),aes(x=as.integer(X)/`90s`,y=as.integer(Y)/`90s`))+geom_point(colour='#026937') +
+            geom_label_repel(data=myData()%>% filter(X/`90s` > quantile(X/`90s`, input$percX/100)|
+                                                       Y/`90s` > quantile(Y/`90s`, input$percY/100)),aes(label = Player),fill="black",color="white")+
+            labs(x=glue::glue("{myData()$xAxis} P90"),
+                 y=glue::glue("{myData()$yAxis} P90"),
+                 title = paste0(myData()$xAxis," and " ,myData()$yAxis, " 19/20"),
+                 subtitle= paste(unique(myData()$comp),collapse=" - "),
+                 caption = "Data from FBref.com\n@RobinWilhelmus") +
+            dark_theme_gray()+
+            theme(plot.title = element_text(hjust=0.5, size = 15),
+                  plot.subtitle = element_text(hjust=0.5))
         }else  if(input$typeX != "p90X" & input$typeY == "p90Y") {
-            scatterMaken90YDark(df = myData(),
-                            percX=input$percX,
-                            percY=input$percY)
+          ggplot(myData(),aes(x=as.integer(X),y=as.integer(Y)/`90s`))+geom_point(colour='#026937') +
+            geom_label_repel(data=myData()%>% filter(X > quantile(X, input$percX/100)|
+                                                       Y/`90s` > quantile(Y/`90s`, input$percY/100)),aes(label = Player),fill="black",color="white")+
+            labs(x=glue::glue("{myData()$xAxis}"),
+                 y=glue::glue("{myData()$yAxis} P90"),
+                 title = paste0(myData()$xAxis," and " ,myData()$yAxis, " 19/20"),
+                 subtitle= paste(unique(myData()$comp),collapse=" - "),
+                 caption = "Data from FBref.com\n@RobinWilhelmus") +
+            dark_theme_gray()+
+            theme(plot.title = element_text(hjust=0.5, size = 15),
+                  plot.subtitle = element_text(hjust=0.5))
         }else{
-            scatterMakenDark(df = myData(),
-                         percX=input$percX,
-                         percY=input$percY)
+          ggplot(myData(),aes(x=as.integer(X),y=as.integer(Y)))+geom_point(colour='#026937') +
+            geom_label_repel(data=myData()%>% filter(X > quantile(X, input$percX/100)|
+                                                       Y > quantile(Y, input$percY/100)),aes(label = Player),fill="black",color="white")+
+            labs(x=glue::glue("{myData()$xAxis}"),
+                 y=glue::glue("{myData()$yAxis}"),
+                 title = paste0(myData()$xAxis," and " ,myData()$yAxis, " 19/20"),
+                 subtitle= paste(unique(myData()$comp),collapse=" - "),
+                 caption = "Data from FBref.com\n@RobinWilhelmus") +
+            dark_theme_gray()+
+            theme(plot.title = element_text(hjust=0.5, size = 15),
+                  plot.subtitle = element_text(hjust=0.5))
         }
     }
     , height = 500, width = 750)
