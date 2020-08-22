@@ -134,16 +134,16 @@ server <- function(input, output) {
       req(input$Competition)
       req(input$age[1])
       req(input$age[2])
-      req(sub)
+      
       
       if(input$sum == "yes"){
-      
+      test <- paste(input$Competition, collapse=" - ")
       filter(ELCL,`90s` >= input$minNinety) %>% filter(comp %in% input$Competition) %>%
         filter(Squad %in% input$teams) %>%
       filter(Age>input$age[1] & Age < input$age[2])%>%
        ddply(c("Player","Age","Born"), numcolwise(sum)) %>%
       select(Player,`90s`,input$x,input$y) %>%
-      # mutate(subtitle = sub) %>%
+       mutate(comp = test) %>%
     
       mutate(xAxis = input$x) %>%
       mutate(yAxis = input$y) %>%
