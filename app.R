@@ -113,7 +113,7 @@ ui <- fluidPage(tags$head(HTML(
                                  
                                  plotOutput("plot3")),
                         tabPanel("Table", 
-                                h5(textOutput("counter")),
+                                
                                  reactableOutput("codes", width = "auto", height = "auto",
                                                  inline = FALSE))
             )
@@ -202,7 +202,7 @@ output$counter<-  renderText({
                  y=glue::glue("{myData()$yAxis}"),
                  title = paste0(myData()$xAxis," and " ,myData()$yAxis, " 19/20"),
                  subtitle= paste(unique(myData()$comp),collapse=" - "),
-                 caption = "Data from FBref.com\n@RobinWilhelmus") +
+                 caption = "Data from FBref.com\nMade on ShinyNew.RobinKoetsier.nl/FBrefApp") +
             theme_bw()+
             theme(plot.title = element_text(hjust=0.5, size = 15),
                   plot.subtitle = element_text(hjust=0.5))
@@ -214,7 +214,7 @@ output$counter<-  renderText({
                  y=glue::glue("{myData()$yAxis} P90"),
                  title = paste0(myData()$xAxis," and " ,myData()$yAxis, " 19/20"),
                  subtitle= paste(unique(myData()$comp),collapse=" - "),
-                 caption = "Data from FBref.com\n@RobinWilhelmus") +
+                 caption = "Data from FBref.com\nMade on ShinyNew.RobinKoetsier.nl/FBrefApp") +
             theme_bw()+
             theme(plot.title = element_text(hjust=0.5, size = 15),
                   plot.subtitle = element_text(hjust=0.5))
@@ -226,7 +226,7 @@ output$counter<-  renderText({
                  y=myData()$yAxis,
                  title = paste0(myData()$xAxis," and " ,myData()$yAxis, " 19/20"),
                  subtitle= paste(unique(myData()$comp),collapse=" - "),
-                 caption = "Data from FBref.com\n@RobinWilhelmus") +
+                 caption = "Data from FBref.com\nMade on ShinyNew.RobinKoetsier.nl/FBrefApp") +
             theme_bw()+
             theme(plot.title = element_text(hjust=0.5, size = 15),
                   plot.subtitle = element_text(hjust=0.5))
@@ -239,7 +239,7 @@ output$counter<-  renderText({
                  y=myData()$yAxis,
                  title = paste0(myData()$xAxis," and " ,myData()$yAxis, " 19/20"),
                 subtitle= paste(unique(myData()$comp),collapse=" - "),
-                 caption = "Data from FBref.com\n@RobinWilhelmus") +
+                caption = "Data from FBref.com\nMade on ShinyNew.RobinKoetsier.nl/FBrefApp") +
             theme_bw()+
             theme(plot.title = element_text(hjust=0.5, size = 15),
                   plot.subtitle = element_text(hjust=0.5))
@@ -256,7 +256,7 @@ output$counter<-  renderText({
                  y=glue::glue("{myData()$yAxis}"),
                  title = paste0(myData()$xAxis," and " ,myData()$yAxis, " 19/20"),
                  subtitle= paste(unique(myData()$comp),collapse=" - "),
-                 caption = "Data from FBref.com\n@RobinWilhelmus") +
+                 caption = "Data from FBref.com\nMade on ShinyNew.RobinKoetsier.nl/FBrefApp") +
             dark_theme_gray()+
             theme(plot.title = element_text(hjust=0.5, size = 15),
                   plot.subtitle = element_text(hjust=0.5))
@@ -268,7 +268,7 @@ output$counter<-  renderText({
                  y=glue::glue("{myData()$yAxis} P90"),
                  title = paste0(myData()$xAxis," and " ,myData()$yAxis, " 19/20"),
                  subtitle= paste(unique(myData()$comp),collapse=" - "),
-                 caption = "Data from FBref.com\n@RobinWilhelmus") +
+                 caption = "Data from FBref.com\nMade on ShinyNew.RobinKoetsier.nl/FBrefApp") +
             dark_theme_gray()+
             theme(plot.title = element_text(hjust=0.5, size = 15),
                   plot.subtitle = element_text(hjust=0.5))
@@ -280,7 +280,7 @@ output$counter<-  renderText({
                  y=glue::glue("{myData()$yAxis} P90"),
                  title = paste0(myData()$xAxis," and " ,myData()$yAxis, " 19/20"),
                  subtitle= paste(unique(myData()$comp),collapse=" - "),
-                 caption = "Data from FBref.com\n@RobinWilhelmus") +
+                 caption = "Data from FBref.com\nMade on ShinyNew.RobinKoetsier.nl/FBrefApp") +
             dark_theme_gray()+
             theme(plot.title = element_text(hjust=0.5, size = 15),
                   plot.subtitle = element_text(hjust=0.5))
@@ -292,7 +292,7 @@ output$counter<-  renderText({
                  y=glue::glue("{myData()$yAxis}"),
                  title = paste0(myData()$xAxis," and " ,myData()$yAxis, " 19/20"),
                  subtitle= paste(unique(myData()$comp),collapse=" - "),
-                 caption = "Data from FBref.com\n@RobinWilhelmus") +
+                 caption = "Data from FBref.com\nMade on ShinyNew.RobinKoetsier.nl/FBrefApp") +
             dark_theme_gray()+
             theme(plot.title = element_text(hjust=0.5, size = 15),
                   plot.subtitle = element_text(hjust=0.5))
