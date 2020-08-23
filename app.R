@@ -11,12 +11,13 @@ library(plyr)
 source("HelpersFBREF.R")
 ga_set_tracking_id("UA-175572271-1")
 ga_set_approval(consent = TRUE)
-
+nvisitors = reactiveVal(0)
 #ELCL <- readRDS("fbrefdata.rds")
 ELCL <- readRDS("ALL.rds")
 #ELCLSum <- readRDS("ALLSUM.rds")
+load(file="counter.Rdata")
+ChoicesList <- colnames(ELCL)[c(3:109,111:136)]
 
-ChoicesList <- colnames(ELCL)[c(3:136)]
 ChoicesList <- sort(ChoicesList)
 ui <- fluidPage(tags$head(HTML(
   "<script>
@@ -77,12 +78,12 @@ ui <- fluidPage(tags$head(HTML(
    ),    
                 selectInput('x', 'X', 
                           
-                            selected = "Progressive Passes",
+                            selected = ChoicesList[sample(3:133,1)],
                             choices = ChoicesList, multiple=FALSE, selectize=TRUE),
             
           
                 selectInput('y', 'Y', 
-                            selected = "Assists",
+                            selected = ChoicesList[sample(3:133,1)],
                             choices = ChoicesList, multiple=FALSE, selectize=TRUE),
             
            
@@ -112,7 +113,7 @@ ui <- fluidPage(tags$head(HTML(
                                  
                                  plotOutput("plot3")),
                         tabPanel("Table", 
-                               
+                                h5(textOutput("counter")),
                                  reactableOutput("codes", width = "auto", height = "auto",
                                                  inline = FALSE))
             )
@@ -122,6 +123,15 @@ ui <- fluidPage(tags$head(HTML(
 
 
 server <- function(input, output) {
+output$counter<-  renderText({
+    if (!file.exists("counter.Rdata")) 
+      counter <- 0
+    else
+      load(file="counter.Rdata")
+    counter  <- counter + 1
+    save(counter, file="counter.Rdata")     
+    paste("Hits: ", counter)
+  })
   observeEvent(input$Competition, {
     print(input$Competition)
     sub<-input$Competition
@@ -236,6 +246,7 @@ server <- function(input, output) {
         }
         }
         , height = 500, width = 750)
+    
     output$plot3<-renderPlot({
         if(input$typeX == "p90X" & input$typeY != "p90Y"){
           ggplot(myData(),aes(x=as.integer(X)/`90s`,y=as.integer(Y)))+geom_point(colour='#026937') +
