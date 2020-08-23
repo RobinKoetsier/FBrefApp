@@ -11,7 +11,7 @@ library(plyr)
 source("HelpersFBREF.R")
 ga_set_tracking_id("UA-175572271-1")
 ga_set_approval(consent = TRUE)
-
+nvisitors = reactiveVal(0)
 #ELCL <- readRDS("fbrefdata.rds")
 ELCL <- readRDS("ALL.rds")
 #ELCLSum <- readRDS("ALLSUM.rds")
