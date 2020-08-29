@@ -17,7 +17,7 @@ ga_set_approval(consent = TRUE)
 ELCL <- readRDS("ALL.rds")
 AllSquad <- readRDS("AllSquad.rds")
 
-colnames(AllSquad) <- gsub("(GK)","GK",colnames(AllSquad))
+
 AllSquad[2:172] %<>% mutate_if(is.character,as.numeric)
 AllSquad[is.na(AllSquad)] <- 0
 ChoicesList <- colnames(ELCL)[c(3:109,111:136)]
