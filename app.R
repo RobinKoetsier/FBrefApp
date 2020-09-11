@@ -26,7 +26,7 @@ ChoicesList <- colnames(ELCL)[c(3:109,111:136)]
 ChoicesListSquad <- colnames(AllSquad)[c(2:172)]
 ChoicesListSquad <- sort(ChoicesListSquad)
 ChoicesList <- sort(ChoicesList)
-ui <- navbarPage(theme = shinytheme("yeti"),selected = "Players",
+ui <- navbarPage(theme = shinytheme("flatly"),selected = "Players",
   tags$head(HTML(
   
   "<script>
