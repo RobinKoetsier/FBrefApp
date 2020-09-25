@@ -217,7 +217,7 @@ title = "Create your own FBref scatter plot - A Shiny app by @RobinWilhelmus",
                                              plotOutput("plot5")),
                                     tabPanel("Table", 
                                              
-                                             reactableOutput("codes", width = "auto", height = "auto",
+                                             reactableOutput("codes2", width = "auto", height = "auto",
                                                              inline = FALSE),
                                              h4("", align = "center"))
              )))
@@ -278,7 +278,7 @@ server <- function(input, output) {
     req(input$CompetitionSquad)
     
       test <- paste(input$CompetitionSquad, collapse=" - ")
-      filter(AllSquad,comp %in% input$CompetitionSquad) %>%
+     df<- filter(AllSquad,comp %in% input$CompetitionSquad) %>%
         filter(Season %in% input$seasonSQ) %>%
         filter(Squad %in% input$teams) %>%
         
@@ -290,7 +290,7 @@ server <- function(input, output) {
         mutate(xAxis = input$xx) %>%
         mutate(yAxis = input$yy) 
        
-    
+    unique(df)
     
   })
   output$codes <- renderReactable({
