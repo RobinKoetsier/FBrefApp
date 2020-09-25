@@ -34,7 +34,7 @@ AllSquad <- rbind(AllSquad2019,AllSquad2020)
 
 
 
-AllSquad[2:172] %<>% mutate_if(is.character,as.numeric)
+AllSquad[2:171] %<>% mutate_if(is.character,as.numeric)
 AllSquad[is.na(AllSquad)] <- 0
 ChoicesList <- colnames(ELCL)[c(3:109,111:136)]
 ChoicesListSquad <- colnames(AllSquad)[c(2:172)]
