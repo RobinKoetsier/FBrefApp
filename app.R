@@ -131,7 +131,7 @@ title = "Create your own FBref scatter plot - A Shiny app by @RobinWilhelmus",
                )),
              
              # Show a plot of the generated distribution
-             mainPanel("Last update: 24-09-2020",
+             mainPanel("Last update: 25-09-2020",
                tabsetPanel(type = "tabs",
                            tabPanel("Plot", 
                                  #   uiOutput("myPlot"),
@@ -153,11 +153,16 @@ title = "Create your own FBref scatter plot - A Shiny app by @RobinWilhelmus",
            sidebarLayout(
              sidebarPanel(
                fluidRow(column(6, 
+                               radioButtons("seasonSQ", "Season:",
+                                            c("19/20" = "2019",
+                                              "20/21" = "2020"),
+                                            selected = "2020",
+                                            width = "50"),
                                checkboxGroupInput(inputId = "CompetitionSquad",
                                                   label = "Select Competition(s):",
                                                   choices = unique(AllSquad$comp),
                                                   selected =  unique(AllSquad$comp)[c(1:5)])),
-                        column(3,
+                        column(6,
                                radioButtons("typeXSquad", "X Axis:",
                                             c("Sum" = "normX",
                                               "Per Match" = "p90XSquad"),
@@ -199,7 +204,7 @@ title = "Create your own FBref scatter plot - A Shiny app by @RobinWilhelmus",
                         numericInput("percYSquad", "See label above certain percentile Y:", 95, min = 50, max = 100)
                         
                )),
-             mainPanel("Last update: 29-08-2020",
+             mainPanel("Last update: 25-09-2020",
                tabsetPanel(type = "tabs",
                                     tabPanel("Plot", 
                                           #   textOutput("selected_var"),
@@ -274,6 +279,7 @@ server <- function(input, output) {
     
       test <- paste(input$CompetitionSquad, collapse=" - ")
       filter(AllSquad,comp %in% input$CompetitionSquad) %>%
+        filter(Season %in% input$seasonSQ) %>%
         filter(Squad %in% input$teams) %>%
         
         
